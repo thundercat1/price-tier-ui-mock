@@ -1,0 +1,78 @@
+<head>
+  <title>tiered-pricing</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+{{> tieredPricing}}
+</body>
+
+
+<template name="tieredPricing">
+	<div id="container">
+		<div class="row">
+		<button class="btn" id="add-item">Add item</button>
+		<button class="btn" id="log-items">log items</button>
+		</div>
+
+		<div class="col-sm-3 col-sm-offset-3">
+		<form id="set-style">
+				<div class="input-group">
+					<input type="text" class="form-control" id="input-style" placeholder="Enter Style"/>
+					<span class="input-group-btn">
+						<button class="btn" type="submit">Go</button>
+					</span>
+				</div>
+			</form>
+		</div>
+		<div class="col-sm-6" id="color-table">
+			<table class="table">
+				<thead>
+					<th class="col-sm-8">Color</th>
+					<th>Include</th>
+				</thead>
+				<tbody>
+					{{#each colors}}
+						{{>color}}
+					{{/each}}
+				</tbody>
+			</table>	
+		</div>
+
+
+		<div class="col-sm-6">
+			<table class="table table-striped">
+				<thead>
+						<th class="col-sm-4">Sellthrough %</th>
+						<th class="col-sm-6">Discount To</th>
+				</thead>
+				<tbody>
+					{{#each triggers}}
+						{{>trigger}}
+					{{/each}}
+				</tbody>
+
+			</table>
+		</div>
+
+	</div>
+</template>
+
+<template name="trigger">
+	<tr>
+		<div class="col-sm-6">
+		<td><input type="text" class="form-control" value="{{qtySold}}"/>%</td>
+		</div>
+		<div class="col-sm-6">
+		<td>{{salePercent}}</td>
+		</div>
+	</tr>
+</template>
+
+<template name="color">
+	<tr>
+		<td>{{this}}</td>
+		<td><input type="checkbox"/></td>
+	</tr>
+</template>
