@@ -1,23 +1,24 @@
 <head>
-  <title>tiered-pricing</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<title>tiered-pricing</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-{{> tieredPricing}}
+	{{> tieredPricing}}
 </body>
 
 
 <template name="tieredPricing">
-	<div id="container">
-		<div class="row">
-		<button class="btn" id="add-item">Add item</button>
-		<button class="btn" id="log-items">log items</button>
-		</div>
+	<div class="container">
+		<!--div class="row">
+			<button class="btn" id="add-item">Add item</button>
+			<button class="btn" id="log-items">log items</button>
+		</div-->
+		<div class="col-sm-6" id="left-side">
 
-		<div class="col-sm-3 col-sm-offset-3">
-		<form id="set-style">
+		<div class="col-sm-6 col-sm-offset-6">
+			<form id="set-style">
 				<div class="input-group">
 					<input type="text" class="form-control" id="input-style" placeholder="Enter Style"/>
 					<span class="input-group-btn">
@@ -26,7 +27,37 @@
 				</div>
 			</form>
 		</div>
-		<div class="col-sm-6" id="color-table">
+
+		<div id="price-table">
+			<table class="table table-striped">
+				<thead>
+					<th>Sellthrough %</th>
+					<th>Discount To</th>
+				</thead>
+				<tbody>
+					{{#each triggers}}
+						<tr class="triggerRow">
+							{{>trigger}}
+						</tr>
+					{{/each}}
+					
+					<tr>
+						<td><button class="btn btn-success" id="add-row">Add Row</button></td>
+						<td><button class="btn btn-warning pull-right" id="save-btn">Save</button></td>
+
+						</tr>
+				</tbody>
+			</table>
+
+		</div>
+
+
+
+
+		</div>
+
+		<div class="col-sm-6" id="right-side">
+		<div class="" id="color-table">
 			<table class="table">
 				<thead>
 					<th class="col-sm-8">Color</th>
@@ -34,45 +65,37 @@
 				</thead>
 				<tbody>
 					{{#each colors}}
-						{{>color}}
+					{{>color}}
 					{{/each}}
 				</tbody>
 			</table>	
 		</div>
-
-
-		<div class="col-sm-6">
-			<table class="table table-striped">
-				<thead>
-						<th class="col-sm-4">Sellthrough %</th>
-						<th class="col-sm-6">Discount To</th>
-				</thead>
-				<tbody>
-					{{#each triggers}}
-						{{>trigger}}
-					{{/each}}
-				</tbody>
-
-			</table>
 		</div>
+
+
 
 	</div>
 </template>
-
 <template name="trigger">
-	<tr>
-		<div class="col-sm-6">
-		<td><input type="text" class="form-control" value="{{qtySold}}"/>%</td>
+		<td><div class="input-group">
+			<input type="text" class="form-control qty-sold-trigger" value="{{qtySold}}"/>
+			<span class="input-group-addon">%</span>
 		</div>
-		<div class="col-sm-6">
-		<td>{{salePercent}}</td>
+	</td>
+	<td>
+		<div class="input-group">
+			<input type="text" class="form-control percent-off" value="{{salePercent}}"/>
+			<span class="input-group-addon">%</span>
 		</div>
-	</tr>
+	</td>
 </template>
 
 <template name="color">
 	<tr>
 		<td>{{this}}</td>
-		<td><input type="checkbox"/></td>
+		<td>
+			<input type="checkbox"/>
+
+		</td>
 	</tr>
 </template>

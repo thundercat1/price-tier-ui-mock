@@ -1,1 +1,7 @@
-/* CSS declarations go here */
+.container {
+	padding-top: 50px;
+}
+
+#price-table {
+	margin-top: 50px;
+}
