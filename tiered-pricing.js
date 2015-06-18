@@ -61,6 +61,10 @@ Template.tieredPricing.helpers({
     return colors
   },
 
+  selectedItem: function(){
+    return Session.get('selectedItem');
+  },
+
   triggers: function(){
     var selectedItem = Session.get('selectedItem');
     if (typeof(selectedItem) == 'undefined'){

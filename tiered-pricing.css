@@ -8,7 +8,15 @@
 
 
 #productImage {
-	height: 100px;
-	width: 100px;
+	height: 150px;
+	width: 150px;
+	margin-bottom: 20px;
+}
 
+#copyTo {
+	margin-top: 20px;
+}
+
+#copyTo > button {
+	margin-top: 10px;
 }

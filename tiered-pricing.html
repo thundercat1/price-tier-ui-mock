@@ -2,6 +2,7 @@
 	<title>tiered-pricing</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
@@ -28,7 +29,9 @@
 			</form>
 		</div>
 
+		{{#with selectedItem}}
 		<div id="price-table">
+			<h4>Price Adjustment Triggers</h4>
 			<table class="table table-striped">
 				<thead>
 					<th>Sellthrough %</th>
@@ -50,9 +53,12 @@
 			</table>
 
 		</div>
-
-
-
+		<div id="copyTo">
+			<h4>Copy Settings to more skus</h4>
+			<textarea type="paragraph" class="form-control" placeholder="Copy and paste directly from spreadsheet"></textarea>
+			<button class="btn btn-standard pull-right">Copy</button>
+		</div>
+		{{/with}}
 
 		</div>
 
@@ -73,6 +79,7 @@
 				</tbody>
 			</table>	
 		</div>
+
 		</div>
 
 
