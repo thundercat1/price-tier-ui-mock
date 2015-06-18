@@ -1,33 +1,7 @@
-/*
-Items = [
- {
-    'style': 'ORU0004',
-    'expires': new Date(2015, 6, 6),
-    'qtySoldTriggers': [
-      {
-        'qtySold': 100,
-        'salePercent': 40,
-        'finished': true
-      },
-      {
-        'qtySold': 50,
-        'salePercent': 20,
-        'finished': false
-      },
-      {
-        'qtySold': 20,
-        'salePercent': 10,
-        'finished': false
-      }
-    ]
- } 
-]
-*/
-
 Items = new Mongo.Collection('items');
 
 if (Meteor.isClient) {
-  Session.setDefault('style', 'ORU0004');
+  //Session.setDefault('style', 'ORU0004');
 
   var logHello = function(){
     console.log('hello');
@@ -42,48 +16,10 @@ if (Meteor.isClient) {
     }
     console.log(t);
     return t;
-
   };
 
   Template.tieredPricing.events({
-    "click #add-item": function(){
-      console.log('adding item');
-      Items.insert(
-      {
-        'style': 'SNZ0340',
-        'expires': new Date(2015, 6, 6),
-        'qtySoldTriggers': [
-        {
-          'qtySold': 0,
-          'salePercent': 30,
-          'finished': true
-        },
-        {
-          'qtySold': 20,
-          'salePercent': 20,
-          'finished': false
-        }
-        ]
-      });
-    },
-
-    "click #log-items": function(){
-      i = Items.find({});
-      console.log(i);
-    },
-
-    /*
-    "change .qty-sold-trigger": function(e){
-      logHello();
-      currentTriggerValues();
-      //Items.update(Session.get('selectedItemTriggersId'), {$set: {: ! this.checked}});
-      Items.update(Session.get('selectedItemTriggersId'), {$set: {qtySoldTriggers: currentTriggerValues()}});
-    },
-    */
-
     "click #add-row": function(){
-      //var newQtySoldTrigger = document.getElementById('new-trigger-qty-sold').value;
-      //var newSalePercent = document.getElementById('new-trigger-sale-percent').value;
       Items.update(Session.get('selectedItemTriggersId'), {$push: {qtySoldTriggers: {'qtySold': null, 'salePercent': null}}});
     },
 
@@ -97,6 +33,10 @@ if (Meteor.isClient) {
         console.log(res.statusCode, res.data);
         if(res.statusCode == 200){
           Session.set('selectedItem', res.data);
+          console.log(res.data);
+          console.log('setting product image');
+          console.log($('#productImage'))
+          $('#productImage').attr('src', 'http://www.backcountry.com/' + res.data.products[0].skus[0].image.url);
         } else {
           alert('Item not found');
         }
@@ -142,7 +82,6 @@ Template.tieredPricing.helpers({
 });
 
 };
-
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
