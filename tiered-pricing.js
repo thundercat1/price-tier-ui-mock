@@ -41,6 +41,7 @@ if (Meteor.isClient) {
           alert('Item not found');
         }
       });
+      $('input#input-style').blur();
       return false
     }
   });
